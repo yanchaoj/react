@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting started with the assessment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Fork and clone repo and run # `npm install`.
 
 ## Available Scripts
 
