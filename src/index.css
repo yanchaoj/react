@@ -1,3 +1,45 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(26, 202, 229) ;
+  margin: 1px;
+  text-align: center;
+  
+}
+.singleuser {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(102, 89, 189);
+  width: 600px;
+  margin: auto;
+  border: 5px solid rgb(56, 75, 185);
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+.userItem:hover{
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+ 
+  
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem;
+  font-size: 1rem;
+  background:rgb(79, 141, 200);
+  color: white;
+
+}
+.btn:hover{
+  cursor:pointer;
+  opacity: .8;
+}
+
+.deletebtn {
+  display: inline-block;
+  padding: 2rem;
+  font-size: 1rem;
+  background:rgb(174, 207, 83);
+  color: white;
+
 }

@@ -1,64 +1,76 @@
 import React from 'react'
+import Loading from './components/Loading'
+import Users from './components/Users'
+import SingleUser from './components/SingleUser'
 
 
 class App extends React.Component {
-  // // state you should have
-    // users
-    // singleUser
-    // loading
-    // loadingMessage = 'app is loading...' -> pass as props to loading component.
-
-  
-  // Components
-    // 1. Users
-    // 2. UserItem
-    // 3. SingleUser (single highlighted user)
-    // 4. Loading Component
-    // 5. Button component - FOR THE BACK BUTTON
-
-  // Functionality
-    // Ability to set a single user (click event on a user)
-    // Back buttons should make single user state null. 
-
-
-  // 1. Use componentDidMount to make an api call to https://jsonplaceholder.typicode.com/users/
-  // 2. The app should show all users in a list.
-  // 3. Show a loading component while making api calls
-  // 4. Show a single user when it is clicked on.
-  // 5. Have a back button that changes the singleTodo state back to null.
-
-
-  // When clicking on a single user, should make API call to https://jsonplaceholder.typicode.com/users/ID, 
-  // get the id from the event object that is created. 
-
-  // If loading, render loading component with loading message passed in as props.
-
-  // Conditionaly render Todos -> TodoItem or singleTodo
 
   constructor(props) {
     super(props)
     this.state = {
-      // put state here
+      users: null,
+      singleUser: null,
+      loading: true,
+      loadingMessage: 'App is loading ...'
+
     }
   }
 
+
   componentDidMount() {
-    // Make initial api call here.
+       fetch('https://jsonplaceholder.typicode.com/users/')
+      // fetch('https://hidden-bastion-86690.herokuapp.com/api/users')
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      // .then((data) => this.setState({ users: data, loading: false }))
+      .catch((err) => console.log(err.message))
   }
+
 
   render() {
 
     const setSingleUser = (e) => {
-      // for setting single user.
+      this.setState({ loading: true })
+      fetch(`https://jsonplaceholder.typicode.com/users/${e.target.id}`)
+        .then((res) => res.json())
+        .then((data) => this.setState({ singleUser: data, loading: false }))
     }
 
     const clearSingleUser = () => {
-      // changing state for singleUser
+      this.setState({ singleUser: null })
+    }
+    
+    const deleteSingleUser = (e) => {
+      console.log(e.target.id)
+      
+      fetch(`https://jsonplaceholder.typicode.com/users/${e.target.id}`,{
+      method: 'DELETE',
+      headers:{'Content-Type': 'application/json'}
+      })
+
+}
+    
+
+    if (this.state.loading) {
+      return (
+        <Loading message={this.state.loadingMessage} />
+      )
+
     }
 
+    if (this.state.singleUser){
+      return  (
+        <SingleUser singleUser={this.state.singleUser} clearSingleUser={clearSingleUser} deleteSingleUser={deleteSingleUser} />
+      )
 
-    return(
-      <h1>Conditionally render Loading component, SingleUser component, or Users component</h1>
+      
+    }
+
+    return (
+
+      this.state.users ? <Users users={this.state.users} setSingleUser={setSingleUser} /> : null
+
     )
   }
 }

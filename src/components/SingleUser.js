@@ -1,11 +1,21 @@
 import React from 'react'
+import Button from './Button'
+import Deletebtn from './Deletebtn'
 
 class SingleUser extends React.Component {
     render() {
-        return <>
-        <h1>Should only render after a single user is clicked on.</h1>
-        <p>Use the data that you get back to display the user's name, email, and phone number in a card. Do not worry about styling.</p>
-        </>
+        return (
+          <div className="singleuser">
+            <h1>Name: {this.props.singleUser.name}</h1>
+            <p>Phone: {this.props.singleUser.phone}</p>
+            <p>Company: {this.props.singleUser.company.name}</p>
+            <p>Websie: {this.props.singleUser.website}</p>
+            <p>City: {this.props.singleUser.address.city}</p>
+           <Button clearSingleUser={this.props.clearSingleUser}/>
+           {/* <Button deleteSingleUser={this.props.deleteSingleUser}/> */}
+         </div>
+        )
+       
     }
 }
 

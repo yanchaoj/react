@@ -2,7 +2,7 @@ import React from 'react'
 
 class Loading extends React.Component {
     render() {
-        return <h1>Loading should only be rendered when the loading state is true</h1>
+        return <h1>{this.props.message}</h1>
     }
 }
 
